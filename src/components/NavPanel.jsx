@@ -1,15 +1,15 @@
-import React from "react";
-import me from "../assets/me.jpg";
+import { useState } from "react";
 import Image from "./ui/Image";
 import SubHeading from "./ui/SubHeading";
 import Description from "./ui/Description";
+import axios from "axios";
 
 function NavPanel({ renderedView, setRenderedView }) {
-  const profile = {
-    name: "Mourya Chiranjeevi",
-    role: "React Developer",
-    image: me.src,
-  };
+  const [profile, setProfile] = useState();
+
+  axios.get("http://localhost:3000/api/profile").then((resp) => {
+    setProfile(resp.data);
+  });
 
   const navLinks = [
     {
@@ -28,15 +28,15 @@ function NavPanel({ renderedView, setRenderedView }) {
       {/* Profile Section */}
       <section className="h-64 flex flex-col justify-evenly items-center">
         <Image
-          src={profile.image}
+          src={profile?.image}
           alt="Profile Picture"
           width={"100px"}
           height={"100px"}
           rounded={"full"}
         />
         <div>
-          <SubHeading>{profile.name}</SubHeading>
-          <Description>{profile.role}</Description>
+          <SubHeading>{profile?.name}</SubHeading>
+          <Description>{profile?.role}</Description>
         </div>
       </section>
       {/* Nav Links  */}
@@ -50,7 +50,7 @@ function NavPanel({ renderedView, setRenderedView }) {
                   ? "p-4 bg-black-700 rounded-md font-semibold cursor-pointer"
                   : "p-4 cursor-pointer"
               }
-              onClick={() => setRenderedView(linkObj.view)}
+              onClick={() => setRenderedView(linkObj?.view)}
             >
               {linkObj.name}
             </li>
@@ -59,7 +59,7 @@ function NavPanel({ renderedView, setRenderedView }) {
       </section>
       {/* Footer section */}
       <section>
-        <Description>Designed and Developed by {profile.name}</Description>
+        <Description>Designed and Developed by {profile?.name}</Description>
       </section>
     </div>
   );
