@@ -8,7 +8,7 @@ function ViewContainer({ renderedView }) {
     contact: <Contact />,
   };
   return (
-    <div className="grow bg-white text-black-700 m-8 mr-1 rounded-lg p-8">
+    <div className="grow bg-white text-black-700 m-8 mr-1 rounded-lg p-8 overflow-auto">
       {views[renderedView]}
     </div>
   );

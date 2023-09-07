@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Image from "./ui/Image";
 import SubHeading from "./ui/SubHeading";
 import Description from "./ui/Description";
 import axios from "axios";
+import DisplayImage from "./ui/DisplayImage";
 
 function NavPanel({ renderedView, setRenderedView }) {
   const [profile, setProfile] = useState();
@@ -24,16 +24,10 @@ function NavPanel({ renderedView, setRenderedView }) {
     },
   ];
   return (
-    <div className="w-1/5 p-8 flex flex-col">
+    <div className="md:w-1/2 lg:w-1/5 p-8 flex flex-col">
       {/* Profile Section */}
       <section className="h-64 flex flex-col justify-evenly items-center">
-        <Image
-          src={profile?.image}
-          alt="Profile Picture"
-          width={"100px"}
-          height={"100px"}
-          rounded={"full"}
-        />
+        <DisplayImage src={profile?.image} alt="Profile Picture" />
         <div>
           <SubHeading>{profile?.name}</SubHeading>
           <Description>{profile?.role}</Description>
